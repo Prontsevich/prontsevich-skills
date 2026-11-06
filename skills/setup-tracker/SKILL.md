@@ -90,9 +90,9 @@ Show the user drafts of:
 - `docs/agents/tracker.md`.
 - A short `## Work tracking` pointer in the rules file chosen in step 1. If that
   section exists, update its tracker pointer in place and keep the rest; never
-  append a duplicate. If neither `AGENTS.md` nor `CLAUDE.md` exists, create
-  `AGENTS.md`, which Claude Code and other agents read. Never create a second
-  rules file here.
+  append a duplicate.
+  If neither `AGENTS.md` nor `CLAUDE.md` exists, create `AGENTS.md`, which
+  Claude Code and other agents read. Never create a second rules file here.
 - When `docs/contributing.md` describes tracker operations, reduce that part to
   the policy and a link to the adapter, so the operations have one home.
 

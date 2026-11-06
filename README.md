@@ -80,6 +80,23 @@ omp plugin marketplace add Prontsevich/prontsevich-skills
 omp plugin install prontsevich-skills@prontsevich
 ```
 
+### Hermes
+
+```sh
+hermes plugins install Prontsevich/prontsevich-skills --enable
+```
+
+Hermes reads the root `plugin.json` (Agent Plugins v1) and skips the
+`.claude-plugin/` manifests. `hermes plugins update` picks up a new version.
+
+### git-commit-helper
+
+The same marketplace also lists
+[git-commit-helper](https://github.com/Prontsevich/git-commit-helper), a
+separate plugin with its own repository: install `git-commit-helper@prontsevich`
+the same way. Hermes installs it with
+`hermes plugins install Prontsevich/git-commit-helper --enable`.
+
 ### Other agents
 
 Copy a folder from `skills/` into the agent's skill directory. The entrypoint

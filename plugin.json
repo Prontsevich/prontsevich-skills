@@ -1,0 +1,18 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "prontsevich-skills",
+  "version": "0.6.0",
+  "description": "Agent skills for planning, executing, and documenting changes in software projects.",
+  "author": {
+    "name": "Sergey Prontsevich",
+    "url": "https://github.com/Prontsevich"
+  },
+  "repository": "https://github.com/Prontsevich/prontsevich-skills",
+  "license": "MIT",
+  "keywords": [
+    "skills",
+    "planning",
+    "execution",
+    "documentation"
+  ]
+}

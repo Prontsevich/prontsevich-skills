@@ -16,6 +16,20 @@
         "execution",
         "documentation"
       ]
+    },
+    {
+      "name": "git-commit-helper",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/Prontsevich/git-commit-helper.git"
+      },
+      "description": "Safe Conventional Commit workflow with scope, conflict and secret checks and an explicit confirmation.",
+      "category": "engineering",
+      "keywords": [
+        "git",
+        "commit",
+        "conventional-commits"
+      ]
     }
   ]
 }
