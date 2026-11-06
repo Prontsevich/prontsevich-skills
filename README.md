@@ -54,6 +54,25 @@ codex plugin marketplace add Prontsevich/prontsevich-skills
 codex plugin add prontsevich-skills@prontsevich
 ```
 
+Codex reads the Claude Code manifests in this repository, so no separate Codex
+manifest is needed. Skills carry the plugin prefix, as `prontsevich-skills:change`.
+
+A repository can declare the plugin for its whole team in `.codex/config.toml`,
+which Codex reads once the project is trusted:
+
+```toml
+[marketplaces.prontsevich]
+source_type = "git"
+source = "https://github.com/Prontsevich/prontsevich-skills.git"
+
+[plugins."prontsevich-skills@prontsevich"]
+enabled = true
+```
+
+Each user then runs `codex plugin marketplace upgrade` once inside that
+repository, which fetches the marketplace and installs the plugin. Until then
+Codex starts without these skills.
+
 ### omp
 
 ```sh
@@ -72,8 +91,7 @@ Clone the repository and run `scripts/link-skills.sh` to symlink every skill
 into `~/.claude/skills` and `~/.codex/skills`. A `git pull` then updates the
 linked skills. Set `SKILL_LINK_DESTS` to link into other directories. Do not link into a
 harness that also has the plugin installed: both copies load, and every skill
-shows up twice. With the plugin in Claude Code, link for Codex only:
-`SKILL_LINK_DESTS=$HOME/.codex/skills scripts/link-skills.sh`. The script
-leaves an existing real directory in place and reports it.
+shows up twice. With the plugin installed in every harness you use, skip the
+links. The script leaves an existing real directory in place and reports it.
 
 Maintenance rules for this repository are in [AGENTS.md](AGENTS.md).

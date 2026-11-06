@@ -84,6 +84,9 @@ Execution cadence and commit permission are separate:
   staging/committing.
 - A request to execute the whole batch or use autopilot does not by itself
   authorize commits. An explicit request for automatic batch commits does.
+- The execute-tasks adapter or repository guidance can make automatic commits
+  the standing default. That rule counts as the explicit request for every
+  run, and an explicit opt-out in the request still wins for that run.
 - A no-commit request allows all authorized implementation and validation to
   continue; it is not a blocker at every unit.
 - Honor requested checkpoints, pauses, and reorderings. Otherwise continue
