@@ -1,7 +1,6 @@
 ---
 name: setup-tracker
-description: "Configure the work tracker for this repository: Linear, Plane, ClickUp, local Markdown, or another tracker. Writes the agent adapter docs/agents/tracker.md. Run once per repository, or again to switch trackers or repair the mapping."
-disable-model-invocation: true
+description: "Configure the work tracker for this repository: Linear, Plane, ClickUp, local Markdown, or another tracker. Writes the agent adapter docs/agents/tracker.md. Use only when the user explicitly asks to set up, switch, or repair the tracker; never invoke it on your own, since choosing the tracker is the user's decision."
 ---
 
 # Setup Tracker
