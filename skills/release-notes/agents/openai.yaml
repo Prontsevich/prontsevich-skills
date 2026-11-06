@@ -1,0 +1,4 @@
+interface:
+  display_name: "Release Notes"
+  short_description: "List what a deployed version changed for its users"
+  default_prompt: "Use $release-notes to list what the latest deployed version changed for its users."

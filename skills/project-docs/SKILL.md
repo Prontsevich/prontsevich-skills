@@ -93,6 +93,23 @@ states, indexing, and closure. Link it from documentation and agent entrypoints.
 This repository rule is the ongoing operating contract; this skill establishes
 and maintains it.
 
+### Agent adapters
+
+`docs/agents/` holds one adapter for each skill that needs this project's
+choices. Bootstrap and adapt create the missing adapters and repair drifted
+ones, without waiting to be asked:
+
+- `release-notes.md`: when the project ships versions (release tags, version
+  bumps, a deploy entry point), invoke `release-notes` to set up its adapter.
+  Skip a project that never releases.
+- `tracker.md`: `setup-tracker` runs only at the user's request, because
+  choosing the canonical tracker is the user's decision. When the adapter is
+  missing, say so in the report and ask the user to run `/setup-tracker`. Never
+  write a tracker adapter yourself.
+
+Link the adapters from the documentation navigation, and list in the report
+which adapters were created or repaired.
+
 ## Handle existing conventions deliberately
 
 `docs/specs/` can be a living capability registry or a set of dated design

@@ -16,9 +16,16 @@ Agent Skills format.
   write `docs/agents/tracker.md`, which maps work-tracking roles and operations
   to Linear, Plane, ClickUp, local Markdown, or another tracker. User-invoked
   only.
+- [release-notes](skills/release-notes/SKILL.md): list what a deployed version
+  changed for its users, as terse bullets that keep the product's own names. A
+  project's deploy step can end with it.
 
-The skills form one flow, `change` → `execute-tasks` → `project-docs`, and each
-also works on its own.
+The skills form one flow, `change` → `execute-tasks` → `project-docs`, closed by
+`release-notes` once a version ships, and each also works on its own.
+
+Per-project choices live in adapters under `docs/agents/`: `setup-tracker`
+writes `tracker.md`, and `release-notes` writes `release-notes.md`, which
+`project-docs` creates during bootstrap.
 
 `change` and `execute-tasks` read the tracker adapter written by
 `setup-tracker`. Without one, they keep work local and ask you to run
