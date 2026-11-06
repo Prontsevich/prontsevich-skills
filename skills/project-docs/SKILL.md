@@ -99,6 +99,14 @@ and maintains it.
 choices. Bootstrap and adapt create the missing adapters and repair drifted
 ones, without waiting to be asked:
 
+- `execute-tasks.md`: write it from what the repository settles. It holds the
+  verification baseline (the actual test, build and check scripts and how to
+  scope them), review tooling, worker routing per harness, and any closure
+  steps the project adds to a plan's close. Write only the parts the repository
+  actually settles.
+- `change.md`: when the project has a proposal or plan template, a capability
+  registry, or steps that record a shipped change, write where each lives and
+  what a proposal must carry. Skip it when planning uses only the defaults.
 - `release-notes.md`: when the project ships versions (release tags, version
   bumps, a deploy entry point), invoke `release-notes` to set up its adapter.
   Skip a project that never releases.

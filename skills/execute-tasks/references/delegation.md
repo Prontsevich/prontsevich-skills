@@ -57,6 +57,49 @@ mutating commands, or second worker until it finishes. Read-only inspection
 and progress updates are allowed. This serial-write rule overrides generic
 encouragement to fill concurrency slots.
 
+## Detect a stalled worker
+
+A worker can wait forever on a permission prompt nobody is there to answer: an
+auto-mode classifier denies a command, the worker retries, and one call never
+returns. A wall-clock deadline is the wrong guard, because it kills a worker that
+is only thinking, and a large unit can legitimately run longer than any deadline
+worth setting. Judge progress instead, with what the runtime exposes:
+
+- **Completion is delivered and a job hub exists** (omp `hub`, or similar): write
+  no watcher. Wait in five-minute windows, and on each window read the job's state
+  and the tail of its history. One quiet window during a build or a test run means
+  nothing. Two consecutive windows with no new tool call is a stall.
+- **The launch returns a transcript file** (Claude Code's `output_file`): its
+  modification time is a free progress signal, since every tool call and message
+  appends a line. Run one background probe per dispatch on the exact path the
+  launch returned. Never discover the file by listing the newest one, because the
+  newest file there is the probe's own log. Stop the probe when the completion
+  notice arrives, since a finished worker stops writing too.
+
+  ```bash
+  F=<transcript path from the launch result>
+  IDLE_LIMIT=240   # four minutes without a new line is a stall, not thinking
+  while true; do
+    now=$(date +%s)
+    # BSD/macOS stat; on Linux use `stat -c %Y`. A failed stat counts as a stall.
+    m=$(stat -L -f %m "$F" 2>/dev/null) || { echo "WATCHER: cannot stat $F"; break; }
+    [ $(( now - m )) -gt "$IDLE_LIMIT" ] && { echo "STALLED: no output for $(( now - m ))s"; break; }
+    sleep 20
+  done
+  ```
+
+- **Supervised workers with their own protocol** (`check --wait` and similar): the
+  wait is the protocol's, and absence of news is a checkpoint, never proof of death.
+
+Read the transcript file only through its timestamp. Opening it floods the
+parent's context.
+
+On a stall, diagnose before stopping: the agent's age and status, and whether the
+command it claims to run exists in the process list. An empty process list next
+to a "running" agent means it is blocked on permission, not working. Stop it and
+take the unit over yourself. Its edits up to that point are usually intact on
+disk, so never re-dispatch on top of half-finished edits.
+
 ## Review and bounded fixes
 
 Surface the worker report's outcome, file purposes, checks/results, deviations,

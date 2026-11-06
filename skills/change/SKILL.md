@@ -20,9 +20,12 @@ repository's code exploration rules before broad code reads. Read the project
 rules yourself; a harness may not have loaded them.
 
 Use existing repository templates and routing. Read the skill adapter
-`.codex/change.md` if it exists, or another one explicitly routed by repository
-guidance. A skill adapter is optional; create one only on request, not as a
-side effect of running this skill.
+`docs/agents/change.md` if it exists, `.codex/change.md` in a repository that
+still keeps it there, or another one explicitly routed by repository guidance.
+It names the project's proposal template and path, the capability registry it
+binds to, and the steps that record a shipped change. A skill adapter is
+optional. `project-docs` creates it during bootstrap; otherwise create one only
+on request, not as a side effect of running this skill.
 A capability registry is an optional living contract anchor, not a prerequisite.
 Planning works with the documentation structure that exists; a capability stub,
 templates, or a documentation hierarchy are separate work, not a side effect.

@@ -30,9 +30,11 @@ Resolve the source in order:
 
 Read applicable `AGENTS.md`, the selected source/linked standards, and
 `docs/README.md` and `docs/contributing.md` when present. Read the skill adapter
-`.codex/execute-tasks.md` if present. It supplies project-specific inputs; it is
-optional and not a second runner. Use required exploration tools before broad
-source reads.
+`docs/agents/execute-tasks.md` if present, or `.codex/execute-tasks.md` in a
+repository that still keeps it there. It supplies project-specific inputs: source
+arguments, the verification baseline, review tooling, worker routing, and extra
+closure steps. It is optional and not a second runner. Use required exploration
+tools before broad source reads.
 
 Check accepted scope, dependencies, unresolved decisions, and existing execution
 authority. Folder/status alone grants no approval. An explicit request to
@@ -88,6 +90,26 @@ Execution cadence and commit permission are separate:
   ready units within the approved batch after recording each result.
 - Push, PR publication, deploy, destructive actions, or broader external writes
   require their own authority.
+
+An unattended batch with automatic commits exists so the user can walk away.
+That makes an unnoticed wrong turn, not a slow run, the expensive failure: each
+further commit on top of a bad unit makes it costlier to unpick. Automatic
+commits therefore lower the bar for stopping. Stop the batch, leave the unit
+uncommitted, and wait for the user when any of these holds:
+
+- A required check fails, and one focused fix attempt did not make it pass.
+- Review returns something a person would want to decide: a correctness finding,
+  an undocumented behaviour change, a security or data-loss risk.
+- The worker reports a blocker, an open question, or work outside its unit.
+- The change touches paths the unit does not name.
+- Commit checks flag a secret, a sensitive file, or conflict markers.
+- The unit needs a product decision. Guessing one unattended is the worst outcome
+  here.
+- The same unit has already been retried once.
+
+Never park a failure by committing it as work in progress. Report one line per
+committed unit as the batch runs, and one closing report. If the batch stopped,
+that report names the blocking unit, the reason, and the proposed next step.
 
 When commits are authorized, use repository message/splitting conventions,
 or an English Conventional Commit describing the change. Keep ephemeral phase
