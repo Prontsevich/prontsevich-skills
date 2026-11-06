@@ -15,8 +15,8 @@
 - `.claude-plugin/marketplace.json` also lists plugins kept in their own
   repositories. Use a `url` source with the Git URL: it is the source type
   Claude Code, Codex and omp were each verified to install.
-- Hermes scans a plugin before installing it and blocks a line that puts a
-  modification verb next to an agent config filename (`AGENTS.md`,
-  `CLAUDE.md`). Keep such a verb and the filename on separate lines when the
-  sentence does not mean modifying that file.
+- Hermes scans a plugin before installing it and blocks prose it reads as an
+  instruction to change an agent rules file: a modification verb with the
+  file's name later on the same line. Where a sentence does not mean that,
+  break the line between the two.
 - Repository artifacts are written in English.
